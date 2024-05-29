@@ -1,0 +1,6 @@
+{
+    "version": "versionstring",
+    "versionCode": versioncodeint,
+    "zipUrl": "https://github.com/hzy132/OpenEUICC_for_Magisk/releases/latest/download/OpenEUICC_Magisk_module_filename",
+    "changelog": "https://github.com/hzy132/OpenEUICC_for_Magisk/releases"
+}
