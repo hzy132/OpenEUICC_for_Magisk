@@ -1,0 +1,67 @@
+name: OpenEUICC_for_Magisk
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '40 9 * * *'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+        
+    - name: set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+
+    - name: Setup Android SDK
+      uses: android-actions/setup-android@v3
+
+    - name: set sercet
+      run: |
+        repo_openeuicc_github_token_t=${{ secrets.REPO_OPENEUICC_GITHUB_TOKEN }}
+        key_file_openeuicc_base=${{ secrets.KEY_FILE_OPENEUICC }}
+        key_file_keystore_properties_half_base=${{ secrets.KEY_FILE_KEYSTORE_PROPERTIES_HALF }}
+        echo "repo_openeuicc_github_token_t=""$repo_openeuicc_github_token_t" > mysercetfile
+        echo "key_file_openeuicc_base=""$key_file_openeuicc_base" >> mysercetfile
+        echo "key_file_keystore_properties_half_base=""$key_file_keystore_properties_half_base" >> mysercetfile
+      
+    - name: clone and build
+      run: |
+        chmod +x actions_build.sh
+        ./actions_build.sh
+        str_flag_change=`cat flag_change`
+        if [ "$str_flag_change" = "1" ]; then echo "env_flag_change=1" >> $GITHUB_ENV; else echo "env_flag_change=0" >> $GITHUB_ENV; fi
+        
+    - name: output info data
+      if: ${{ env.env_flag_change == '1' }}
+      run: |
+        output_apk_unpriv_filename=`cat output/apk_unpriv_filename`
+        output_magisk_module_filename=`cat output/magisk_module_filename`
+        version_str=`cat output/version_str`
+        echo "output_apk_unpriv_filename=$output_apk_unpriv_filename" >> $GITHUB_ENV
+        echo "output_magisk_module_filename=$output_magisk_module_filename" >> $GITHUB_ENV
+        echo "version_str=$version_str" >> $GITHUB_ENV
+    
+    - name: upload artifact
+      if: ${{ env.env_flag_change == '1' }}
+      uses: actions/upload-artifact@v4
+      with:
+        name: build-output
+        path: |
+          output/${{ env.output_magisk_module_filename }}
+          output/${{ env.output_apk_unpriv_filename }}
+
+    - name: releases
+      if: ${{ env.env_flag_change == '1' }}
+      uses: ncipollo/release-action@v1
+      with:
+        artifacts: "output/${{ env.output_magisk_module_filename }},output/${{ env.output_apk_unpriv_filename }}"
+        bodyFile: "output/release_bodyfile"
+        name: "${{ env.version_str }}"
+        tag: "${{ env.version_str }}"
+        commit: "main"
+        token: "${{ secrets.REPO_OPENEUICC_GITHUB_TOKEN }}"
+        
