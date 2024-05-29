@@ -1,0 +1,7 @@
+id=openeuicc
+name=OpenEUICC
+version=openeuiccversion
+versionCode=openeuiccversioncode
+author=PeterCxy, compiled by hzy132
+description=OpenEUICC can provide eSIM support on Android devices that do not support eSIM. Please visit the following URLs for more information. OpenEUICC source code: https://gitea.angry.im/PeterCxy/OpenEUICC . This Magisk module: https://github.com/hzy132/OpenEUICC_for_Magisk .
+updateJson=https://raw.githubusercontent.com/hzy132/OpenEUICC_for_Magisk/main/magisk-module/updateJson
