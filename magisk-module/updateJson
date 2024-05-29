@@ -1,1 +1,6 @@
-
+{
+    "version": "3(286)",
+    "versionCode": 286,
+    "zipUrl": "https://github.com/hzy132/OpenEUICC_for_Magisk/releases/latest/download/OpenEUICC-Magisk_module-3(286).zip",
+    "changelog": "https://github.com/hzy132/OpenEUICC_for_Magisk/releases"
+}
