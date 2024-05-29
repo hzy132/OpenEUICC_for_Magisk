@@ -77,7 +77,8 @@ then
   updatejsontemp_t1=`cat OpenEUICC_for_Magisk/magisk-module/updateJson.temp`
   updatejsontemp_t2=${updatejsontemp_t1/versionstring/$version}
   updatejsontemp_t3=${updatejsontemp_t2/versioncodeint/$versioncode}
-  updatejsontemp=${updatejsontemp_t3/OpenEUICC_Magisk_module_filename/$modulefilename}
+  releasemodulefilename="OpenEUICC-Magisk_module-"$version_t2"."$versioncode".zip"
+  updatejsontemp=${updatejsontemp_t3/OpenEUICC_Magisk_module_filename/$releasemodulefilename}
   cd OpenEUICC_for_Magisk
   echo "$updatejsontemp" > magisk-module/updateJson
   git add magisk-module/updateJson
