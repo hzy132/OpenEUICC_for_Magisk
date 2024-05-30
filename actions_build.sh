@@ -81,11 +81,15 @@ then
   updatejsontemp_t3=${updatejsontemp_t2/versioncodeint/$versioncode}
   releasemodulefilename="OpenEUICC-Magisk_module-"$version_t2"."$versioncode".zip"
   updatejsontemp=${updatejsontemp_t3/OpenEUICC_Magisk_module_filename/$releasemodulefilename}
-  cd OpenEUICC_for_Magisk
-  echo "$updatejsontemp" > magisk-module/updateJson
-  git add magisk-module/updateJson
-  git commit -m "Update info for the latest version"
-  git remote set-url origin https://x-access-token:$repo_openeuicc_github_token_t@github.com/hzy132/OpenEUICC_for_Magisk.git
-  git push origin main
+  updatejson_now=`cat OpenEUICC_for_Magisk/magisk-module/updateJson`
+  if [ "$updatejsontemp" != "$updatejson_now" ]
+  then
+    cd OpenEUICC_for_Magisk
+    echo "$updatejsontemp" > magisk-module/updateJson
+    git add magisk-module/updateJson
+    git commit -m "Update info for the latest version"
+    git remote set-url origin https://x-access-token:$repo_openeuicc_github_token_t@github.com/hzy132/OpenEUICC_for_Magisk.git
+    git push origin main
+  fi
 fi
 
