@@ -57,6 +57,8 @@ then
   cp OpenEUICC/app-unpriv/build/outputs/apk/release/app-unpriv-release.apk output/$versionname
   cp -R OpenEUICC_for_Magisk/magisk-module/META-INF module_magisk_output
   cp -R OpenEUICC_for_Magisk/magisk-module/system module_magisk_output
+  cp OpenEUICC_for_Magisk/magisk-module/customize.sh module_magisk_output
+  cp OpenEUICC_for_Magisk/magisk-module/uninstall.sh module_magisk_output
   str_module_prop_t1=`cat OpenEUICC_for_Magisk/magisk-module/module.prop.temp`
   str_module_prop_t2=${str_module_prop_t1/openeuiccversion/$version}
   str_module_prop=${str_module_prop_t2/openeuiccversioncode/$versioncode}
