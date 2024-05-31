@@ -40,10 +40,10 @@ jobs:
       run: |
         output_apk_unpriv_filename=`cat output/apk_unpriv_filename`
         output_magisk_module_filename=`cat output/magisk_module_filename`
-        version_str=`cat output/version_str`
+        version_str_commit=`cat output/version_str_commit`
         echo "output_apk_unpriv_filename=$output_apk_unpriv_filename" >> $GITHUB_ENV
         echo "output_magisk_module_filename=$output_magisk_module_filename" >> $GITHUB_ENV
-        echo "version_str=$version_str" >> $GITHUB_ENV
+        echo "version_str_commit=$version_str_commit" >> $GITHUB_ENV
     
     - name: upload artifact
       if: ${{ env.env_flag_change == '1' }}
@@ -60,8 +60,8 @@ jobs:
       with:
         artifacts: "output/${{ env.output_magisk_module_filename }},output/${{ env.output_apk_unpriv_filename }}"
         bodyFile: "output/release_bodyfile"
-        name: "${{ env.version_str }}"
-        tag: "${{ env.version_str }}"
+        name: "${{ env.version_str_commit }}"
+        tag: "${{ env.version_str_commit }}"
         commit: "main"
         token: "${{ secrets.REPO_OPENEUICC_GITHUB_TOKEN }}"
         
