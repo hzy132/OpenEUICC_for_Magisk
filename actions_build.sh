@@ -91,6 +91,13 @@ then
     git commit -m "Update info for the latest version"
     git remote set-url origin https://x-access-token:$repo_openeuicc_github_token_t@github.com/hzy132/OpenEUICC_for_Magisk.git
     git push origin main
+    cd magisk-module
+    cp updateJson update.json
+    cd ..
+    git add magisk-module/update.json
+    git commit -m "Update info for the latest version"
+    git remote set-url origin https://x-access-token:$repo_openeuicc_github_token_t@github.com/hzy132/OpenEUICC_for_Magisk.git
+    git push origin main
   fi
 fi
 
