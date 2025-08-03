@@ -14,7 +14,7 @@ git commit -m "useless file"
 git remote set-url origin https://x-access-token:$repo_openeuicc_github_token_t@github.com/hzy132/OpenEUICC_for_Magisk.git
 git push origin main
 cd ..
-git clone https://gitea.angry.im/PeterCxy/OpenEUICC.git
+git clone https://github.com/estkme-group/openeuicc.git
 cd OpenEUICC
 now_commit=`git rev-parse HEAD`
 now_commit_short=`git rev-parse --short HEAD`

@@ -30,7 +30,6 @@ jobs:
       
     - name: clone and build
       run: |
-        chmod +x actions_build.sh
         ./actions_build.sh
         str_flag_change=`cat flag_change`
         if [ "$str_flag_change" = "1" ]; then echo "env_flag_change=1" >> $GITHUB_ENV; else echo "env_flag_change=0" >> $GITHUB_ENV; fi
